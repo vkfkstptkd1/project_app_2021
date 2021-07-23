@@ -1,24 +1,53 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function Food({ fav }) {
-    return <h1 > i like { fav } < /h1>
-}
+const foodILike = [
+    {
+        id:1,
+        name: "kimchi",
+        image: "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg"
+    },
+    {   
+        id:2,
+        name: "samgyupsal",
+        image: "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg"
+    },
+    {
+        id:3,
+        name: "bibimbap",
+        image: "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb"
+    },
+    {
+        id:4,
+        name: "doncasu",
+        image: "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg"
+    },
+    {
+        id:5,
+        name: "kimbap",
+        image: "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg"
+    }
+];
 
-function App() {
-    return ( <
-        div >
-        <
-        h1 > hello < /h1>  <
-        Food fav = "kimchi" / >
-        <
-        Food fav = "samgyupsal" / >
-        <
-        Food fav = "ramen" / >
-        <
-        Food fav = "chamchi" / >
-        <
-        /div >
+function Food({ name, picture }) {
+    return ( 
+        <div>
+            <h2 > I like { name } </h2> 
+            <img src = { picture } alt={name}/>
+        </div>
     );
 }
 
+function App() {
+    return ( 
+            <div> 
+                {foodILike.map(dish => (//형태는 ()안에 함수 적고 바깥에 함수정의해서 쓸 수 있음. 
+                < Food 
+                    key={dish.id}//id로 object들을 구분해놓지 않으면 console창에 error
+                    name = { dish.name }
+                    picture = { dish.image }/>
+                    ))} 
+            </div>
+            );
+        }
 export default App;
