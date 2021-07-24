@@ -1,67 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const foodILike = [
-    {
-        id:1,
-        name: "kimchi",
-        image: "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
-        //rating: "5"
+class App extends React.Component{
+    state = {//동적 데이터 사용하기위해 사용하는 object.
+        count: 0
+    };
     
-    },
-    {   
-        id:2,
-        name: "samgyupsal",
-        image: "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg",
-        rating: "4.9"
-    },
-    {
-        id:3,
-        name: "bibimbap",
-        image: "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb",
-        rating: "4.8"
-    },
-    {
-        id:4,
-        name: "doncasu",
-        image: "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg",
-        rating: "4.7"
-    },
-    {
-        id:5,
-        name: "kimbap",
-        image: "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
-        rating: "4.6"
-    }
-];
+    add=()=>{
+        this.setState(current=>({count: current.count + 1}));
+    };
+    minus=()=>{
+        this.setState(current=>({count: current.count - 1}));
+    };
+    //setState : state를 refresh하고 render을 refresh해주는 함수, 
+    //current : this.state.count라고 명시해도 되지만, 외부 state에 의존하지 않기 위해서 (??) current 함수를 사용하는게 훨씬 더 효율적임.
 
-function Food({ name, picture,rating }) {
-    return ( 
+    render(){
+        return (
         <div>
-            <h2 > I like { name } </h2> 
-            <h4>{rating}/5.0</h4>
-            <img src = { picture } alt={name}/>
-        </div>
-    );
-}
-
-Food.propTypes={//무조건 propTypes라는 이름으로 명시되어야 함. proptypes를 정의해주고 보호해줌
-    name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
-    rating: PropTypes.string//isrequired가 없음. 꼭 필요하지 않은 속성
+            <h1>The number is {this.state.count}</h1>
+            <button onClick = {this.add}>add</button>
+            <button onClick={this.minus}>minus</button>
+        </div>/* 만약 this.add()의 형태라면 실행하자마자 console창에 add출력
+                 그냥 this.add이면 클릭할때만 출력, ()는 '즉시,바로' 를 의미 */
+        );
+    };
 };
 
-function App() {
-    return ( 
-            <div> 
-                {foodILike.map(dish => (//형태는 ()안에 함수 적고 바깥에 함수정의해서 쓸 수 있음. 
-                < Food 
-                    key={ dish.id }//id로 object들을 구분해놓지 않으면 console창에 error
-                    name = { dish.name }
-                    picture = { dish.image }
-                    rating={ dish.rating }/>
-                    ))} 
-            </div>
-            );
-        }
+
 export default App;
