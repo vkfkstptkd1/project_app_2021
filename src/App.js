@@ -9,7 +9,7 @@ class App extends React.Component{
     //componentWillUnmount(){} component가 떠날 때 호출
     //setState : state를 refresh하고 render을 refresh해주는 함수, 
     //current : this.state.count라고 명시해도 되지만, 외부 state에 의존하지 않기 위해서 (??) current 함수를 사용하는게 훨씬 더 효율적임.
-    
+    //className이라고 하는 이유 : css파일은 상관 없는데 javascript class를 쓰고 있으니까 웹페이지가 혼동함. 그래서 자바안에 class는 전부 className으로 수정 
     state = {//state를 쓰려면 App을 class로 선언.
         isLoading : true,
         movies : []
@@ -30,13 +30,13 @@ class App extends React.Component{
     render() {
         const { isLoading,movies } = this.state;
         return (
-        <section class = "container">
+        <section className = "container">
             { isLoading ?
-            (<div class="loader">
-                <span class="loader__text">Loading..</span>
+            (<div className="loader">
+                <span className="loader__text">Loading..</span>
             </div>)
             : movies.map( movie => (
-                <div class="movies">
+                <div className="movies">
                     <Movie 
                         key={movie.id}
                         id={movie.id} 
@@ -44,6 +44,7 @@ class App extends React.Component{
                         title={movie.title} 
                         summary={movie.summary} 
                         poster={movie.medium_cover_image}
+                        genres={movie.genres}
                     />
                 </div>
         ))}
