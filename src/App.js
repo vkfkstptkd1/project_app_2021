@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Movie from "./Movies";
+import "./App.css";
 class App extends React.Component{
     //constructor(){} App class가 호출되면 바로 호출 (생성자) --render 전  
     //componentDidMount(){} component가 처음 render 할때 호출--render 후
@@ -28,20 +29,25 @@ class App extends React.Component{
     }
     render() {
         const { isLoading,movies } = this.state;
-        return (<div>
-            { isLoading ? 
-            "Loading ..." 
+        return (
+        <section class = "container">
+            { isLoading ?
+            (<div class="loader">
+                <span class="loader__text">Loading..</span>
+            </div>)
             : movies.map( movie => (
-            <Movie 
-                key={movie.id}
-                id={movie.id} 
-                year={movie.year} 
-                title={movie.title} 
-                summary={movie.summary} 
-                poster={movie.medium_cover_image}
-            />
+                <div class="movies">
+                    <Movie 
+                        key={movie.id}
+                        id={movie.id} 
+                        year={movie.year} 
+                        title={movie.title} 
+                        summary={movie.summary} 
+                        poster={movie.medium_cover_image}
+                    />
+                </div>
         ))}
-        </div>
+        </section>
         )
     }
 }
